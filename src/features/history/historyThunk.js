@@ -1,0 +1,5 @@
+
+
+const uploadFileThunk = async (data) => {
+
+}

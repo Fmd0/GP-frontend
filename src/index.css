@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --section-max-width: 600px;
+  --section-normal-width: 87.6%;
+}
+
+body {
+  background-color: #F5F8FA;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+  display: grid;
+  place-items: center;
+}
