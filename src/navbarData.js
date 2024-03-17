@@ -14,5 +14,10 @@ export default {
         left: true,
         right: false,
         center: "历史记录"
+    },
+    error: {
+        left: true,
+        right: true,
+        center: "404"
     }
 }

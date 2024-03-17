@@ -1,11 +1,15 @@
 import styled from "styled-components";
+import Navbar from "../components/Navbar.jsx";
 
 
 const ErrorPage = () => {
     return (
-        <Wrapper>
-            <h1>404 Not Found</h1>
-        </Wrapper>
+        <>
+            <Navbar name='error' />
+            <Wrapper>
+                <h1>404 Not Found</h1>
+            </Wrapper>
+        </>
     )
 }
 
