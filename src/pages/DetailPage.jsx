@@ -1,17 +1,23 @@
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {formatPercent} from "../utils/utils.js";
 import Navbar from "../components/Navbar.jsx";
 import ErrorPage from "./ErrorPage.jsx";
+import {useEffect} from "react";
+import {clearStatus} from "../features/history/historySlice.js";
 
 
 const DetailPage = () => {
 
     const param = useParams();
+    const {histories} = useSelector(state => state.history);
+    const dispatch = useDispatch();
+    const history = histories.find(h => h.id === param.id);
 
-    const {histories} = useSelector(state => state.history)
-    const history = histories.find(h => h.id === param.id)
+    useEffect(() => {
+        dispatch(clearStatus())
+    }, []);
 
     if(history === undefined) {
         return <ErrorPage />

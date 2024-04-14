@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import DetailPage from "./pages/DetailPage.jsx";
@@ -8,16 +8,16 @@ import {ToastContainer} from "react-toastify";
 function App() {
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/detail/:id' element={<DetailPage />} />
                 <Route path='/history' element={<HistoryPage />} />
                 <Route path='*' element={<ErrorPage />} />
             </Routes>
-            <ToastContainer position='top-left' newestOnTop />
-        </BrowserRouter>
+            <ToastContainer position='top-center' autoClose='1000' newestOnTop/>
+        </HashRouter>
     )
 }
 
-export default App
+export default App;

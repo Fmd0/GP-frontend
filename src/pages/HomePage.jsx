@@ -4,9 +4,8 @@ import {useRef, useState} from "react";
 import {GrCircleQuestion} from "react-icons/gr";
 import { RxCross2 } from "react-icons/rx";
 import {formatByte} from "../utils/utils.js";
-import axios from "axios";
-import {useDispatch} from "react-redux";
-import {addHistory} from "../features/history/historySlice.js";
+import {useDispatch, useSelector} from "react-redux";
+import {submitForm} from "../features/history/historySlice.js";
 import {Navigate} from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import {toast} from "react-toastify";
@@ -17,9 +16,9 @@ const HomePage = () => {
 
     const imgRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [uploadStatus, setUploadStatus] = useState({status: 'init'});
 
     const dispatch = useDispatch();
+    const {submitState, currentId} = useSelector(state => state.history);
 
     const handleClickRemove = () => {
         setSelectedFile(null)
@@ -28,35 +27,19 @@ const HomePage = () => {
         }
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (selectedFile === null) {
             toast.error("请选择图片", {
-                autoClose: 1000
+                autoClose: 1000,
+
             });
             return;
         }
-        setUploadStatus({
-            status: 'started',
-        })
-        const formData = new FormData(e.target);
-        const response = axios.post(`${import.meta.env.VITE_API_ADDRESS}/upload`, formData);
-
-        toast.promise(response, {
-            pending: "服务端处理中",
-            success: "处理成功",
-            error: "处理失败"
-        }, {
-            autoClose: 1000
-        }).then(result => {
-            dispatch(addHistory(result.data));
-            setUploadStatus({
-                status: 'finished',
-                id: result.data.id
-            })
-        })
-
+        dispatch(submitForm(new FormData(e.target)))
     }
+
 
     return (
         <>
@@ -98,15 +81,15 @@ const HomePage = () => {
                     <div className='button-container'>
                         <button type='submit'
                                 className='right-button'
-                                disabled={uploadStatus.status === 'started'}
+                                disabled={submitState === 'loading'}
                         >
                             上传
                         </button>
                     </div>
                 </form>
                 {
-                    uploadStatus.status === 'finished'&&
-                    <Navigate to={`/detail/${uploadStatus.id}`} />
+                    submitState === 'success'&&
+                    <Navigate to={`/detail/${currentId}`} />
                 }
             </Wrapper>
         </>
