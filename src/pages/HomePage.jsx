@@ -49,8 +49,7 @@ const HomePage = () => {
                     <h3 className='header'>图像上传</h3>
 
                     <input type="file"
-                           // accept='image/jpeg,image/png,image/webp'
-                           accept="image/*"
+                           accept='image/jpeg,image/png,image/webp'
                            name='img'
                            ref={imgRef}
                            onChange={(e) => setSelectedFile(e.target.files[0])}

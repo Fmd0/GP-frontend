@@ -3,7 +3,7 @@ export default {
     home: {
         left: false,
         right: true,
-        center: "电路板计价"
+        center: "图像检测"
     },
     detail: {
         left: true,

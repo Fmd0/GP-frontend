@@ -9,7 +9,8 @@ const submitFormThunk = async (formData, thunkAPI) => {
         return data;
     }
     catch (error) {
-        return thunkAPI.rejectWithValue(error);
+        console.log(error);
+        return thunkAPI.rejectWithValue('error');
     }
 }
 

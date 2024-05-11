@@ -41,7 +41,7 @@ const historySlice = createSlice({
                 state.currentId = payload.id;
                 toast.update(state.toastId, { render: "处理成功", type: "success", isLoading: false, autoClose: 1000 });
             })
-            .addCase(submitForm.rejected, (state,{payload}) => {
+            .addCase(submitForm.rejected, (state) => {
                 // console.log('submitForm.rejected',payload);
                 state.submitState = 'error';
                 toast.update(state.toastId, { render: "处理失败", type: "error", isLoading: false, autoClose: 1000 });
