@@ -49,7 +49,8 @@ const HomePage = () => {
                     <h3 className='header'>图像上传</h3>
 
                     <input type="file"
-                           accept='image/*'
+                           // accept='image/jpeg,image/png,image/webp'
+                           accept="image/*"
                            name='img'
                            ref={imgRef}
                            onChange={(e) => setSelectedFile(e.target.files[0])}
@@ -123,7 +124,11 @@ const Wrapper = styled.section`
         align-items: center;
         border-radius: 16px;
         img {
-            width: 32px;
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 2px;
         }
         h5 {
             color: #282A37;

@@ -15,7 +15,7 @@ const HistoryItem = ({id, date, name, path}) => {
             <Link to={`/detail/${id}`} className='left'>
                 <img src={import.meta.env.VITE_API_ADDRESS+path} alt="uploadfile"/>
                 <div className='info'>
-                    <h3>{name.length>20?`${name.slice(0,20)}...`:name}</h3>
+                    <h3>{name.length>20?`${name.slice(0,28)}...`:name}</h3>
                     <p>{date}</p>
                 </div>
             </Link>
@@ -33,25 +33,28 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: 8px;
-    padding: 12px 14px;
+    padding: 16px 16px;
     border-radius: 17px;
 
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+    }
+    
     img {
         width: 64px;
+        height: 64px;
+        object-fit: cover;
+        object-position: center;
     }
 
     svg {
-        font-size: 24px;
+        font-size: 30px;
         cursor: pointer;
         color: #c00303;
     }
-
-    .left {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: center;
-        justify-items: center;
-    }
+    
 
     .info {
         display: flex;
