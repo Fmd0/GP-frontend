@@ -1,7 +1,6 @@
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {formatPercent} from "../utils/utils.js";
 import Navbar from "../components/Navbar.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import {useEffect} from "react";
@@ -23,29 +22,34 @@ const DetailPage = () => {
         return <ErrorPage />
     }
 
+    const result = JSON.parse(history.result);
     return (
         <>
             <Navbar name='detail'/>
             <Wrapper>
                 <img src={`${import.meta.env.VITE_API_ADDRESS}${history.path}`} alt="detail"/>
-                <h2>检测到的目标总数：{history.result.length}</h2>
 
-                {history.result.length > 0 &&
+
+                {result.length > 0 &&
+                    <>
+                    <h2>检测到目标类别总数：{result.length}</h2>
                     <div className="resultTable">
-                    <h3>类别名称</h3> <h3>置信度</h3>
+                    <h3>元器件名称</h3> <h3>数量</h3>
                     {
-                        history.result.map((r, index) => {
+                        result.map((r) => {
                             return (
                                 <>
-                                    <p key={index}>{r.name}</p>
-                                    <p>{formatPercent(r.confidence)}</p>
+                                    <p>{r.name}</p>
+                                    <p>{r.value}</p>
                                 </>
                             )
                         })
                     }
                 </div>
+                    </>
                 }
-                {/*<h3 className="price">总价¥{0}</h3>*/}
+                { history.price > 0 &&
+                    <h3 className="price">总价¥{history.price}</h3>}
             </Wrapper>
         </>
     )
